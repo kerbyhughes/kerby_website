@@ -1,0 +1,21 @@
+baseURL = "http://example.org/"
+title = "Kerby Hughes"
+theme = "hugo-notepadium"
+copyright = "©2020 Kerby Hughes"
+
+languageCode = "en-us"
+
+[params]
+style = "auto"  # default: "auto", based on system. "light": light theme, "dark": dark theme.
+
+[params.nav]
+showTags = true
+
+[[params.nav.custom]]
+title = "Github"
+url = "https://github.com/kerbyhughes"
+
+[[params.nav.custom]]
+title = "About"
+url = "/about"
+

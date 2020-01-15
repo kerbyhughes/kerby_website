@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag1 on Kerby Hughes</title>
+    <link>/tags/tag1/</link>
+    <description>Recent content in tag1 on Kerby Hughes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>©2020 Kerby Hughes</copyright>
+    <lastBuildDate>Wed, 15 Jan 2020 18:08:23 -0500</lastBuildDate>
+    
+        <atom:link href="/tags/tag1/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First Post</title>
+      <link>/posts/first-post/</link>
+      <pubDate>Wed, 15 Jan 2020 18:08:23 -0500</pubDate>
+      
+      <guid>/posts/first-post/</guid>
+      <description>This is some markdown Here is some code
+	fn sum(a: i32, b: i32) -&amp;gt; i32 { a + b } </description>
+    </item>
+    
+  </channel>
+</rss>

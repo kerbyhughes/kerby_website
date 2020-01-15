@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Kerby Hughes</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Kerby Hughes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>©2020 Kerby Hughes</copyright>
+    <lastBuildDate>Wed, 15 Jan 2020 18:18:23 -0500</lastBuildDate>
+    
+        <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Second Post</title>
+      <link>/posts/second_post/</link>
+      <pubDate>Wed, 15 Jan 2020 18:18:23 -0500</pubDate>
+      
+      <guid>/posts/second_post/</guid>
+      <description>This is some more markdown  List Item List Item  Sub item    I&#39;m an inline-style link
+URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com or http://www.example.com and sometimes example.com (but not on Github, for example).
+Inline code has back-ticks around it.
+let s = &amp;#34;Rust syntax highlighting&amp;#34;; println!(&amp;#34;{}&amp;#34;, s); s = &amp;#34;Python syntax highlighting&amp;#34; print s No language indicated, so no syntax highlighting.</description>
+    </item>
+    
+    <item>
+      <title>First Post</title>
+      <link>/posts/first-post/</link>
+      <pubDate>Wed, 15 Jan 2020 18:08:23 -0500</pubDate>
+      
+      <guid>/posts/first-post/</guid>
+      <description>This is some markdown Here is some code
+	fn sum(a: i32, b: i32) -&amp;gt; i32 { a + b } </description>
+    </item>
+    
+  </channel>
+</rss>

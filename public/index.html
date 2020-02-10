@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.62.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Kerby Hughes</title><link rel="stylesheet" href="/css/core.min.71c1a842517d809b7cf56ea8311ec04857c82c80aeab27addec2a116d1f9015d4309ac61ec4aa8185b87ec939c9f34c2.css" integrity="sha384-ccGoQlF9gJt89W6oMR7ASFfILICuqyet3sKhFtH5AV1DCaxh7EqoGFuH7JOcnzTC"><link rel="alternate" type="application/rss+xml" href="/index.xml" title="Kerby Hughes" /><body>
+<meta name="supported-color-schemes" content="light dark"><title>Kerby Hughes</title><link rel="stylesheet" href="/css/core.min.a66655a62467316695b10af4d596f12e8500b87b9844beaa0f116aa380bcb8336f735810c9421ce510b45f92e02f2a23.css" integrity="sha384-pmZVpiRnMWaVsQr01ZbxLoUAuHuYRL6qDxFqo4C8uDNvc1gQyUIc5RC0X5LgLyoj"><link rel="alternate" type="application/rss+xml" href="/index.xml" title="Kerby Hughes" /><body>
     <div class="base-body"><section id="header" class="site header max-body-width">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Kerby Hughes</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="https://github.com/kerbyhughes"target="_blank">Github</a><a class="nav item" href="/about">About</a></nav></div></span></div></section><div id="content" class="max-body-width"><ul class="note list"><li class="item"><a class="note" href="/posts/second_post/">
-            <p class="note title">Second Post</p><p class="note date">2020-01-15</p><p class="note content">This is some more markdown  List Item List Item  Sub item    I'm an inline-style link
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com or http://www.example.com and sometimes example.com (but not on Github, for example).
-Inline code has back-ticks around it.
-let s = &#34;Rust syntax highlighting&#34;; println!(&#34;{}&#34;, s); s = &#34;Python syntax highlighting&#34; print s No language indicated, so no syntax highlighting.<span class="mldr">&mldr;more</span></p></a><p class="note labels"><a class="note tag" href="/tags/testing/"><span class="hashtag">#</span>testing</a></p></li><li class="item"><a class="note" href="/posts/first-post/">
-            <p class="note title">First Post</p><p class="note date">2020-01-15</p><p class="note content">This is some markdown Here is some code
-	fn sum(a: i32, b: i32) -&gt; i32 { a + b } </p></a><p class="note labels"><a class="note tag" href="/tags/tag1/"><span class="hashtag">#</span>tag1</a><a class="note tag" href="/tags/testing/"><span class="hashtag">#</span>testing</a></p></li></ul></div><section id="footer" class="footer max-body-width"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="https://github.com/kerbyhughes"target="_blank">Github</a><a class="nav item" href="/about">About</a></nav></div></span></div></section><div id="content" class="max-body-width"><ul class="note list"><p class="note title">How this site is hosted</p><p class="note date">2020-02-08</p><article class="article markdown-body"><p>This site was designed to be as simple and fast as possible.</p>
+<ul>
+<li>No client-side javascript</li>
+<li>No server management</li>
+<li>HTTPS only and no certificate management</li>
+<li>Source files for blog posts should be markdown</li>
+<li>Costs should be fixed</li>
+</ul>
+<p>My previous attempt at this was based on <a href="https://hugotunius.se/2016/01/10/the-one-cent-blog.html"target="_blank">The One Cent Blog</a>. This used <a href="https://aws.amazon.com/s3/"target="_blank">S3</a>, <a href="https://jekyllrb.com/"target="_blank">Jekyll</a>, <a href="https://www.cloudflare.com/"target="_blank">Cloudflare</a>, and <a href="https://travis-ci.org/"target="_blank">Travis-CI</a> (for triggering a bucket update when a new commit hits Github). It has the basic parts I wanted - a static site generator, and automated/free tools in front to manage certificates and do caching/DDOS protection, etc. S3 is fantastic, and serving static sites is an officially supported use case, however it's a bit overkill for a basic site. The One Cent Blog does a good job of using the correct tools like AWS Cloudformation to build up a stack and give credentials to Travis-CI for writing to the bucket, but that's an entire account, credentials, and billing system that I wanted to avoid for this use case.</p>
+<h2 id="serving-at-the-edge">Serving at the edge.</h2>
+<p>Ideally I want all the bits served from this domain to come from a CDN. Initially I was looking into <a href="https://www.fastly.com"target="_blank">Fastly</a>&lsquo;s <a href="https://www.fastly.com/products/edge-compute"target="_blank">Edge compute platform</a> with the idea that I could embed a simple Rust web server compiled to Wasm in Fastly's edge, and serve my site directly from the CDN layer. This was pretty experimental and would have cost $50/month at Fastly, so I was looking for another solution.</p>
+<p>Cloudflare (which I was already planning to use for CDN, analytics, WAF, etc&hellip;) recently introduced <a href="https://workers.cloudflare.com"target="_blank">Workers</a>, which compete in the same space as Fastly's Edge programming. You can run Javascript or Wasm code at the edge, on every request. Finally, they have a <a href="https://www.cloudflare.com/products/workers-kv/"target="_blank">KV product for Workers</a>, which provides a key-value data store that can easily be accessed from Worker code. This is exactly what I was looking to implement in a custom Wasm server: look up a request URL in a hash map and return some HTML.</p>
+<h2 id="the-stack">The stack:</h2>
+<ul>
+<li><a href="https://gohugo.io/"target="_blank">Hugo</a></li>
+<li><a href="https://workers.cloudflare.com"target="_blank">Cloudflare Workers</a></li>
+</ul>
+<p>That's it. Hugo is a bit heavyweight for my needs, but it's been very easy to use and it's written in Go, so it's a single binary. The theme I'm using with Hugo is is <a href="https://themes.gohugo.io/hugo-notepadium"target="_blank">Notepadium</a>.</p>
+<p>I use Cloudflare's <a href="https://developers.cloudflare.com/workers/tooling/wrangler/"target="_blank">Wrangler</a> CLI tool to publish the site to my Cloudflare Worker via the Cloudflare API. It uses a single namespace in the KV store, and maps each URL to a html file that is returned when the URL is requested.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ wrangler publish
+ Using namespace <span style="color:#66d9ef">for</span> Workers Site <span style="color:#e6db74">&#34;__kerby_website-workers_sites_assets&#34;</span>
+ Uploading...
+ Success
+⬇️ Installing wranglerjs...
+⬇️ Installing wasm-pack...
+ Built successfully, built project size is <span style="color:#ae81ff">10</span> KiB.
+ Successfully published your script to kerby.website/*
+</code></pre></div><h2 id="results">Results</h2>
+<p>It's fast enough. The root url scores a perfect 100 in Chrome's lighthouse audit for performance. There is definitely a bit of a delay when hitting the site cold, where Cloudflare has to spin up a Worker. Overall, I'll take that tradeoff for the simplicity of this setup.</p>
+<p>Recurring costs are $5 per month.</p>
+</article></a></ul></div><section id="footer" class="footer max-body-width"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">©2020 Kerby Hughes</p>
 </section></div>
 </body>

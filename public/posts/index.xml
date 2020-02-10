@@ -7,31 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>©2020 Kerby Hughes</copyright>
-    <lastBuildDate>Wed, 15 Jan 2020 18:18:23 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 08 Feb 2020 11:41:06 -0500</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Second Post</title>
-      <link>/posts/second_post/</link>
-      <pubDate>Wed, 15 Jan 2020 18:18:23 -0500</pubDate>
+      <title>How this site is hosted</title>
+      <link>/posts/how-this-site-is-hosted/</link>
+      <pubDate>Sat, 08 Feb 2020 11:41:06 -0500</pubDate>
       
-      <guid>/posts/second_post/</guid>
-      <description>This is some more markdown  List Item List Item  Sub item    I&#39;m an inline-style link
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com or http://www.example.com and sometimes example.com (but not on Github, for example).
-Inline code has back-ticks around it.
-let s = &amp;#34;Rust syntax highlighting&amp;#34;; println!(&amp;#34;{}&amp;#34;, s); s = &amp;#34;Python syntax highlighting&amp;#34; print s No language indicated, so no syntax highlighting.</description>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>/posts/first-post/</link>
-      <pubDate>Wed, 15 Jan 2020 18:08:23 -0500</pubDate>
-      
-      <guid>/posts/first-post/</guid>
-      <description>This is some markdown Here is some code
-	fn sum(a: i32, b: i32) -&amp;gt; i32 { a + b } </description>
+      <guid>/posts/how-this-site-is-hosted/</guid>
+      <description>This site was designed to be as simple and fast as possible.
+ No client-side javascript No server management HTTPS only and no certificate management Source files for blog posts should be markdown Costs should be fixed  My previous attempt at this was based on The One Cent Blog. This used S3, Jekyll, Cloudflare, and Travis-CI (for triggering a bucket update when a new commit hits Github). It has the basic parts I wanted - a static site generator, and automated/free tools in front to manage certificates and do caching/DDOS protection, etc.</description>
     </item>
     
   </channel>
